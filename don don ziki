@@ -1,0 +1,137 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+int userChoise(){
+    int choose;
+    printf("1 - tosh \n2 - qaychi \n3 - qog'oz \n");
+    scanf("%d",&choose);
+    if(choose == 1){
+        printf("Sizning tanlov tosh\n");
+    }
+    else if(choose == 2){
+        printf("Sizning tanlov qaychi\n");
+    }
+    else if(choose == 3){
+        printf("Sizning tanlov qog'oz\n");
+    }
+    else{
+        printf("Faqat 1 va 3 oralig'idagi sonlarni kiriting!!!\n");
+        userChoise();
+    }
+    return choose;
+
+}
+int botchoise(int random){
+    if(random == 1){
+        printf("Bizning tanlov tosh\n");
+    }
+    else if(random == 2){
+        printf("Bizning tanlov qaychi\n");
+    }
+    else if(random == 3){
+        printf("Bizning tanlov qog'oz\n");
+    }
+    return random;
+}
+int regame(){
+    int retry;
+    printf("Yana o'ynashni xoxlasangiz 1 ni aks xolda 0 ni kiritng: ");
+    scanf("%d",&retry);
+
+    if(retry == 1){
+        return 1;
+    }
+    else if(retry  == 0){
+        return retry;
+    } else{
+        printf("Faqat 1 yoki 0 kiriting!!!\n");
+        regame();
+    }
+}
+void yakuniy(){
+    printf("\nO'yin tugadi\nIshtirok etganingiz uchun raxmat!!!\n");
+
+}
+
+
+int main()
+{
+    srand(time(0));
+    int choose,botChooser,idf = 1;
+    int botddz;
+    int  userddz;
+
+
+
+
+
+    while(idf){
+
+        int result,userResult;
+
+        botChooser = 1 + rand() % 3;
+        userResult = userChoise();
+        result = botchoise(botChooser);
+
+        switch(userResult){
+            case 1:
+                userddz = 1;
+                break;
+            case 2:
+                userddz = 2;
+                break;
+            case 3:
+                userddz = 3;
+                break;
+        }
+
+        switch(result){
+            case 1:
+                botddz = 1;
+                break;
+            case 2:
+                botddz = 2;
+                break;
+            case 3:
+                botddz = 3;
+                break;
+        }
+
+        if(userddz == botddz){
+            idf = 0;
+            printf("\nDurrang\n");
+            if(regame() == 1){
+                idf = 1;
+            } else if(regame() == 0){
+                yakuniy();
+                idf = 0;
+            }
+        }
+        else if((userddz == 1 && botddz == 2) || (userddz == 2 && botddz == 3)|| (userddz == 3 && botddz == 1)){
+            idf = 0;
+            printf("\nSiz yutdingiz\n");
+            if(regame() == 1){
+                idf = 1;
+            } else if(regame() == 0){
+                yakuniy();
+                idf = 0;
+            }
+        }
+        else{
+            idf = 0;
+            printf("\nSiz yutqazdingiz\n");
+            if(regame() == 1){
+                idf = 1;
+            } else if(regame() == 0){
+                yakuniy();
+                idf = 0;
+            }
+
+        }
+
+    }
+
+    return 0;
+}
